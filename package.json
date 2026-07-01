@@ -1,0 +1,42 @@
+{
+  "name": "ports-monitor",
+  "version": "1.0.0",
+  "description": "Windows port monitor - see every dev server running on localhost",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "tsc -p tsconfig.electron.json && concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build": "tsc -p tsconfig.electron.json && vite build",
+    "preview": "vite preview",
+    "pack": "npm run build && electron-builder",
+    "electron": "electron ."
+  },
+  "dependencies": {
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "~4.2.1",
+    "concurrently": "~8.2.2",
+    "electron": "~28.1.0",
+    "electron-builder": "~24.9.1",
+    "typescript": "~5.3.3",
+    "vite": "~4.5.2",
+    "wait-on": "~7.2.0"
+  },
+  "build": {
+    "appId": "com.ports.monitor",
+    "productName": "Ports",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "resources/icon.png"
+    }
+  }
+}
